@@ -68,7 +68,9 @@ Le format des tests est à votre discrétion (curl, Postman, ...) mais vous devr
 
 Votre API peut être documentée sur le modèle suivant. Vous pouvez alternativement utiliser Swagger si vous le souhaitez.
 
-#### Get un parcours
+Vous devrez impérativement spécifier tous les codes d'état que l'on peut obtenir sur chaque point d'entrée, ainsi que l'encodage attendu s'il y a un body.
+
+#### Get un user
 
 ```http
   GET /api/user/{id}
