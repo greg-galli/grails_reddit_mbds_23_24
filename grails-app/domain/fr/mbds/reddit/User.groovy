@@ -19,10 +19,9 @@ class User implements Serializable {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+    CustomFile thumbnail
 
-    static hasOne = [thumbnail: CustomFile]
-
-    static hasMany = [communities: Community]
+    static hasMany = [communities: Community, files: CustomFile]
 
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
@@ -41,5 +40,8 @@ class User implements Serializable {
 	    password column: '`password`'
     }
 
-    static mappedBy = [communities: "members"]
+    static mappedBy = [
+            communities: "members",
+            files: "author"
+    ]
 }
