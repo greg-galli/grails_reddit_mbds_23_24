@@ -126,7 +126,3 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-                
-customFile:
-    path: C:/Users/gregg/IdeaProjects/grails_reddit_mbds_23_24/grails-app/assets/images/
-    url: http://localhost:8080/assets/

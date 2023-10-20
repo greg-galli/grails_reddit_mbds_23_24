@@ -19,7 +19,8 @@ class UserController {
     }
 
     def create() {
-        respond new User(params)
+        def roleList = Role.list()
+        respond new User(params), model: [roleList: roleList]
     }
 
     def save(User user) {
@@ -29,7 +30,11 @@ class UserController {
         }
 
         try {
+            // Ajouter ici la gestion d'upload de fichier (thumbFile)
+            // Ne faites pas ça commes des bourrins, on crée un service qui sera en charge de l'upload des fichiers
+            def role = Role.get(params.role)
             userService.save(user)
+            UserRole.create(user, role, true)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return
