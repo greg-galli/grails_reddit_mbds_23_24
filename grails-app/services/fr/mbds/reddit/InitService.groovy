@@ -22,6 +22,10 @@ class InitService {
                     UserRole.create(userInstance, userRole)
                     userInstance.save(flush: true)
             }
+            User.withSession {
+                it.flush()
+                it.clear()
+            }
         }
         // Pour chaque User, on crée une Community
         if (Community.count == 0) {
@@ -43,8 +47,17 @@ class InitService {
                     }
                     user.save(flush: true)
             }
+
+            User.withSession {
+                it.flush()
+                it.clear()
+            }
+            Community.withSession {
+                it.flush()
+                it.clear()
+            }
         }
-        // On rajoute deux Post pour chauque User dans chaque Community
+        // On rajoute deux Post pour chaque User dans chaque Community
         if (Post.count == 0)
         {
             User.list().each {
@@ -58,6 +71,10 @@ class InitService {
                             communityInstance.save(flush: true)
                     }
             }
+            Post.withSession {
+                it.flush()
+                it.clear()
+            }
         }
         // On rajoute un message par Post par User
         if (Message.count == 0)
@@ -70,6 +87,12 @@ class InitService {
                     }
                     postInstance.save(flush: true)
             }
+
+            Message.withSession {
+                it.flush()
+                it.clear()
+            }
         }
+        return true
     }
 }
