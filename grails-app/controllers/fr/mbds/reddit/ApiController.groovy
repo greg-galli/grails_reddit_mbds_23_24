@@ -2,7 +2,9 @@ package fr.mbds.reddit
 
 import grails.converters.JSON
 import grails.converters.XML
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured('ROLE_ADMIN')
 class ApiController {
 
     def userService

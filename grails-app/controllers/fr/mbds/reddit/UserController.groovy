@@ -1,8 +1,10 @@
 package fr.mbds.reddit
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
+@Secured('ROLE_ADMIN')
 class UserController {
 
     UserService userService
