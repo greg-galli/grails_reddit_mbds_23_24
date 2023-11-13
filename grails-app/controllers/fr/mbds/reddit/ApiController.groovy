@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ApiController {
 
     def userService
+    def userCustomService
 
     /**
      * Ressource SINGLETON USER
@@ -15,13 +16,13 @@ class ApiController {
      * Methodes : GET / PUT / PATCH / DELETE
      */
     def user() {
+        if (!params.id)
+            return response.status = 400
+        User userInstance = userService.get(params.id)
+        if (!userInstance)
+            return response.status = 404
         switch (request.getMethod()) {
             case "GET":
-                if (!params.id)
-                    return response.status = 400
-                def userInstance = userService.get(params.id)
-                if (!userInstance)
-                    return response.status = 404
                 renderThis(userInstance, request.getHeader("Accept"))
                 break
             case "PUT":
@@ -29,6 +30,7 @@ class ApiController {
             case "PATCH":
                 break
             case "DELETE":
+                userCustomService.deleteUserClean(userInstance)
                 break
             default:
                 return response.status = 405
@@ -47,8 +49,7 @@ class ApiController {
                 if (!request.getHeader("Content-Type").contains("json"))
                     render(status: 400, text: "Le body doit être formaté en JSON")
                 def userInstance = new User(request.getJSON())
-                if (userInstance.validate())
-                {
+                if (userInstance.validate()) {
                     userService.save(userInstance)
                     return response.status = 201
                 }
