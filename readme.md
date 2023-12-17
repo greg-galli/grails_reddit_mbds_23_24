@@ -88,7 +88,28 @@ La livraison se fera **impérativement** sur un Github Classroom qui vous sera c
 La livraison contiendra :
 - Le code de votre projet incluant le backend et l'API
 - Les tests d'API que vous aurez réalisé
-- Une vidéo de démonstration qui respectera un scénario qui sera défini plus tard
+- Une vidéo de démonstration qui respectera un scénario suivant :
+  - Backend 
+    - Identifiez vous en tant qu'administrateur
+    - Créez un compte de type utilisateur
+    - Logout
+    - Login avec le compte utilisateur que vous avez créé
+    - Création d'une nouvelle communauté
+    - Ajout d'un post dans la communauté créée, ce dernier devra contenir des illustrations
+    - Ajout d'un message sur le post créé
+    - Logout
+    - Login avec le compte administrateur
+    - Suppression de l'utilisateur créé au début de ce scénario (ou à défaut, suppression de la communauté qu'il a créé)
+  - API
+    - Login pour récupérer un Token
+    - Créer un compte de type utilisateur
+    - Créer une communauté
+    - Ajouter un post à cette dernière
+    - Ajouter un message à ce dernier
+    - Pour chaque entité créée :
+      - Modifier cette dernière (PATCH ou PUT)
+      - Afficher le rendu (GET)
+    - Présenter 4 requêtes prévues en erreur
 - Présentation des tests de l'API
 - Un readme clair qui expliquera ce que vous avez fait, ce que vous n'avez pas pu faire et qui donnera des précisions sur le projet (versions des outils utilisées) ainsi que les manipulations à effectuer afin que je puisse faire tourner votre projet sans problème
 
