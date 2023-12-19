@@ -12,13 +12,27 @@ class UserCustomService {
             Long id ->
                 user.removeFromCommunities(Community.get(id))
         }
-
-//        def communities = Community.findAllByAuthor(user)
-//        communities.each {
-//            it.delete()
-//        }
-
-
+        def communities = Community.findAllByAuthor(user)
+        communities.each{
+            Community community ->
+                def communityMembers = community.members*.id
+                communityMembers.each {
+                    Long communityMemberId ->
+                        User.get(communityMemberId).removeFromCommunities(community)
+                }
+                community.delete()
+        }
+        def userFiles = CustomFile.findAllByAuthor(user)
+        userFiles.each {it.delete()}
+        def messages = Message.findAllByAuthor(user)
+        messages.each {
+            it.delete()
+        }
+        def posts = Post.findAllByAuthor(user)
+        posts.each {
+            it.delete()
+        }
+        UserRole.removeAll(user)
         user.delete()
     }
 }
